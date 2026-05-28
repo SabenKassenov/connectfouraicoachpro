@@ -13,12 +13,14 @@ import {
   History,
   LogIn,
   LogOut,
+  Crown,
 } from "lucide-react";
 import { useTheme } from "@/lib/theme";
 import { useI18n, type Lang } from "@/lib/i18n";
 import { useProfile } from "@/lib/store";
 import { useAuth } from "@/lib/auth";
 import { AuthDialog } from "@/components/AuthDialog";
+import { ProDialog } from "@/components/ProDialog";
 import { Button } from "@/components/ui/button";
 import {
   Select,
