@@ -318,7 +318,7 @@ function PlayPage() {
         <div>
           <GlassCard className="relative overflow-hidden">
             <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
-              <div className="flex items-center gap-2">
+              <div className="flex flex-wrap items-center gap-2">
                 <span className="text-xs uppercase tracking-wider text-muted-foreground">
                   {t("difficulty")}
                 </span>
@@ -329,13 +329,35 @@ function PlayPage() {
                     reset();
                   }}
                 >
-                  <SelectTrigger className="h-9 w-[130px] rounded-xl">
+                  <SelectTrigger className="h-9 w-[120px] rounded-xl">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="easy">{t("easy")}</SelectItem>
                     <SelectItem value="medium">{t("medium")}</SelectItem>
                     <SelectItem value="hard">{t("hard")}</SelectItem>
+                  </SelectContent>
+                </Select>
+                <span className="ml-1 text-xs uppercase tracking-wider text-muted-foreground">
+                  {t("mode")}
+                </span>
+                <Select
+                  value={mode}
+                  onValueChange={(v) => {
+                    setMode(v as "classic" | "word");
+                    reset();
+                  }}
+                >
+                  <SelectTrigger className="h-9 w-[150px] rounded-xl">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="classic">{t("classicMode")}</SelectItem>
+                    <SelectItem value="word">
+                      <span className="inline-flex items-center gap-1.5">
+                        <Type className="h-3.5 w-3.5" /> {t("wordMode")}
+                      </span>
+                    </SelectItem>
                   </SelectContent>
                 </Select>
               </div>
