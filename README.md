@@ -8,10 +8,10 @@ Connect Four AI Coach Pro transforms the classic “4 in a Row” game into a mo
 
 # Live Demo
 
-[Add your Lovable published link here]
+[https://connectfouraicoachpro.lovable.app]
 
 Example:
-https://your-project-name.lovable.app
+https://connectfouraicoachpro.lovable.app
 
 ---
 
