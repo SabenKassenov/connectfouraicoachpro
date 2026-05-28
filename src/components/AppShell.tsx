@@ -176,6 +176,35 @@ export function GlassCard({
   );
 }
 
+function ProBadgeButton() {
+  const { t } = useI18n();
+  const profile = useProfile();
+  if (profile.isPro) {
+    return (
+      <div
+        className="hidden items-center gap-1 rounded-full border border-amber-300/40 bg-amber-400/15 px-3 py-1 text-xs font-semibold text-amber-300 sm:flex"
+        title={t("proActive")}
+      >
+        <Crown className="h-3 w-3" /> {t("proActive")}
+      </div>
+    );
+  }
+  return (
+    <ProDialog
+      trigger={
+        <Button
+          size="sm"
+          className="rounded-xl bg-gradient-to-r from-amber-400 via-fuchsia-500 to-cyan-400 text-white shadow-md hover:opacity-95"
+        >
+          <Crown className="mr-1.5 h-4 w-4" />
+          <span className="hidden sm:inline">{t("upgradePro")}</span>
+          <span className="sm:hidden">Pro</span>
+        </Button>
+      }
+    />
+  );
+}
+
 function AuthMenu() {
   const { t } = useI18n();
   const { user, profile, signOut, ready } = useAuth();
