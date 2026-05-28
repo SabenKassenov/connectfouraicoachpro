@@ -14,8 +14,11 @@
 <img width="1257" height="558" alt="Light theme" src="https://github.com/user-attachments/assets/9d65fa7c-3ce4-4c58-8e4d-c07b2455986f" />
 ## Features Overview
 <img width="1873" height="819" alt="Features" src="https://github.com/user-attachments/assets/89ea74dc-5d88-44a6-b284-56a831fb8f3b" />
+## Word Mode
 <img width="1858" height="867" alt="Word Mode" src="https://github.com/user-attachments/assets/11c1b764-79b6-4dd1-a76e-e523249b3a84" />
+## Statistics
 <img width="1859" height="856" alt="Statistics" src="https://github.com/user-attachments/assets/f7fd2085-2da2-4d78-ad54-1abd7f06759a" />
+## Premium Upgrade
 <img width="1801" height="828" alt="Pro Plan" src="https://github.com/user-attachments/assets/55047266-4bb5-4789-b027-00b4c8476a24" />
 # Connect Four AI Coach Pro
 
