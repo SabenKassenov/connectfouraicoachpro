@@ -22,6 +22,7 @@ export const Route = createFileRoute("/")({
 
 function Landing() {
   const { t } = useI18n();
+  const { user } = useAuth();
   return (
     <AppShell>
       <section className="relative grid items-center gap-10 py-6 lg:grid-cols-2 lg:py-12">
