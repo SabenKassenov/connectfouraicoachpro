@@ -143,12 +143,19 @@ function PlayPage() {
     if (!ended || !result || finishedRef.current) return;
     finishedRef.current = true;
     playSound(result === "win" ? "win" : "click");
-    const review = buildCoachReview({
+    const baseReview = buildCoachReview({
       result,
       difficulty,
       moves: movesLog,
       finalBoard: board,
     });
+    const review: CoachReview =
+      mode === "word" && bonusWords.length
+        ? {
+            ...baseReview,
+            summary: `${baseReview.summary} ${t("wordBonus")}: ${bonusWords.join(", ")}.`,
+          }
+        : baseReview;
     setReviewLoading(true);
     setReviewError(null);
     // Simulate small async delay to mimic AI gateway latency
@@ -166,7 +173,7 @@ function PlayPage() {
     else if (result === "loss") toast.error(t("youLose"), { description: review.summary });
     else toast(t("draw"), { description: review.summary });
     return () => clearTimeout(timer);
-  }, [ended, result, board, difficulty, movesLog, t]);
+  }, [ended, result, board, difficulty, movesLog, t, mode, bonusWords]);
 
   // Place a letter for the just-dropped chip and detect new words. Safe no-op in classic mode.
   const applyWordEffects = React.useCallback(
