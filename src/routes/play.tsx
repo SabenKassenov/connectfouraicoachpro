@@ -258,6 +258,7 @@ function PlayPage() {
       setBoard(next);
       setLastMove(placed);
       setMovesLog((m) => [...m, { col, player: 2 }]);
+      applyWordEffects(next, placed);
       const w = checkWin(next);
       if (w) setWin(w);
       else if (isDraw(next)) setDraw(true);
@@ -265,7 +266,7 @@ function PlayPage() {
       setAiThinking(false);
     }, delay);
     return () => clearTimeout(id);
-  }, [turn, ended, board, difficulty]);
+  }, [turn, ended, board, difficulty, applyWordEffects]);
 
   const reset = React.useCallback(() => {
     setBoard(emptyBoard());
