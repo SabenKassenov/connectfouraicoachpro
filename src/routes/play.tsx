@@ -279,6 +279,10 @@ function PlayPage() {
     setReview(null);
     setReviewError(null);
     setReviewLoading(false);
+    setLetters(emptyLetters());
+    setBonusCells([]);
+    setBonusWords([]);
+    foundWordKeysRef.current = new Set();
     finishedRef.current = false;
     saveGame(null);
   }, []);
