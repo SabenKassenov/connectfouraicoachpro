@@ -2,9 +2,22 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { AppShell, GlassCard } from "@/components/AppShell";
 import { useI18n } from "@/lib/i18n";
 import { useAuth } from "@/lib/auth";
+import { useProfile } from "@/lib/store";
 import { AuthDialog } from "@/components/AuthDialog";
+import { ProDialog } from "@/components/ProDialog";
 import { Button } from "@/components/ui/button";
-import { Brain, Trophy, MessageSquare, Type, Calendar, Sparkles, Gamepad2, LogIn } from "lucide-react";
+import {
+  Brain,
+  Trophy,
+  MessageSquare,
+  Type,
+  Calendar,
+  Sparkles,
+  Gamepad2,
+  LogIn,
+  Crown,
+  Check,
+} from "lucide-react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
