@@ -168,6 +168,48 @@ function PlayPage() {
     return () => clearTimeout(timer);
   }, [ended, result, board, difficulty, movesLog, t]);
 
+  // Place a letter for the just-dropped chip and detect new words. Safe no-op in classic mode.
+  const applyWordEffects = React.useCallback(
+    (nextBoard: Board, placed: { row: number; col: number }) => {
+      if (mode !== "word") return;
+      try {
+        const newLetters = letters.map((row) => [...row]);
+        newLetters[placed.row][placed.col] = randomLetter(lang);
+        setLetters(newLetters);
+        const found = detectWords(newLetters, lang);
+        const fresh: { word: string; cells: [number, number][] }[] = [];
+        for (const f of found) {
+          const key =
+            f.word +
+            "|" +
+            f.cells.map(([r, c]) => `${r}:${c}`).join(",");
+          if (!foundWordKeysRef.current.has(key)) {
+            foundWordKeysRef.current.add(key);
+            fresh.push(f);
+          }
+        }
+        if (fresh.length) {
+          const allCells: [number, number][] = [];
+          for (const f of fresh) for (const c of f.cells) allCells.push(c);
+          setBonusCells((prev) => [...prev, ...allCells]);
+          const words = fresh.map((f) => f.word);
+          setBonusWords((prev) => [...prev, ...words]);
+          const reward = fresh.length * 10;
+          profileActions.addCoins(reward);
+          toast.success(`${t("wordDetected")}: ${words.join(", ")}`, {
+            description: `+${reward} ${t("bonusCoins")}`,
+          });
+          setTimeout(() => setBonusCells([]), 2500);
+        }
+      } catch {
+        /* word mode is optional — never break classic play */
+      }
+      // Avoid unused: ensure nextBoard is referenced
+      void nextBoard;
+    },
+    [mode, letters, lang, t],
+  );
+
   const playerMove = React.useCallback(
     (col: number) => {
       if (ended || aiThinking || turn !== 1) return;
@@ -180,6 +222,7 @@ function PlayPage() {
       setLastMove(placed);
       setHintCol(null);
       setMovesLog((m) => [...m, { col, player: 1 }]);
+      applyWordEffects(next, placed);
       const w = checkWin(next);
       if (w) {
         setWin(w);
@@ -191,7 +234,7 @@ function PlayPage() {
       }
       setTurn(2);
     },
-    [board, ended, aiThinking, turn],
+    [board, ended, aiThinking, turn, applyWordEffects],
   );
 
   // AI turn
