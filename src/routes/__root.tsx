@@ -89,6 +89,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
+      { name: "twitter:title", content: "Connect Four AI Coach Pro" },
+      { name: "description", content: "Connect Four AI Coach Pro is a premium AI-powered strategy gaming platform that transforms the classic “4 in a Row” game into a modern training experiance" },
+      { property: "og:description", content: "Connect Four AI Coach Pro is a premium AI-powered strategy gaming platform that transforms the classic “4 in a Row” game into a modern training experiance" },
+      { name: "twitter:description", content: "Connect Four AI Coach Pro is a premium AI-powered strategy gaming platform that transforms the classic “4 in a Row” game into a modern training experiance" },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/fde8ab69-010a-4a81-8e4a-98462b1110ec" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/fde8ab69-010a-4a81-8e4a-98462b1110ec" },
     ],
     links: [
       {
