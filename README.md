@@ -2,15 +2,12 @@
 
 A premium AI-powered Connect Four strategy platform built as an incubator-ready startup MVP.
 
-Connect Four AI Coach Pro transforms the classic “4 in a Row” game into a modern AI-assisted competitive and educational gaming experience with intelligent opponents, AI coaching, gamification, multilingual support, and innovative gameplay modes.
+Connect Four AI Coach Pro transforms the classic “4 in a Row” game into a modern AI-assisted competitive and educational gaming experience with intelligent opponents, AI coaching, gamification, multilingual support, voice controls, and innovative gameplay modes.
 
 ---
 
 # Live Demo
 
-[https://connectfouraicoachpro.lovable.app]
-
-Example:
 https://connectfouraicoachpro.lovable.app
 
 ---
@@ -21,59 +18,91 @@ https://github.com/SabenKassenov/connectfouraicoachpro
 
 ---
 
-# Features
+# Project Overview
 
-## Core Gameplay
-- Classic Connect Four (7x6)
-- Smooth chip-drop animations
+This project was created as part of the nFactorial Incubator technical assignment.
+
+The goal was not simply to recreate a basic Connect Four game, but to build a modern AI-era gaming product with:
+- strong UX thinking
+- AI integration
+- gamification
+- localization
+- monetization concepts
+- innovative gameplay mechanics
+- premium SaaS-style design
+
+The application focuses on:
+- strategic gameplay
+- player improvement
+- engagement and replayability
+- AI-powered coaching
+- scalable product thinking
+
+---
+
+# Core Features
+
+## Classic Connect Four Gameplay
+- 7x6 game board
+- Gravity-based chip drop mechanics
+- Smooth animations
+- Turn-based gameplay
 - Win detection:
   - Horizontal
   - Vertical
   - Diagonal
 - Draw detection
-- Winning line glow effects
-- Responsive gameplay
-- Local game persistence
+- Winning line highlight effects
+- Game persistence using localStorage
 
 ---
 
 # AI Opponent
 
 Multiple AI difficulty levels:
-
 - Easy
 - Medium
 - Hard
 
-The AI uses rule-based game logic:
-- threat blocking
+The AI uses rule-based strategic logic:
 - center prioritization
-- strategic move selection
-- heuristic evaluation
+- threat blocking
+- winning move detection
+- heuristic decision making
+
+Additional UX:
+- “AI is thinking...” animation
+- smooth AI move delay
+- responsive gameplay flow
 
 ---
 
-# AI Coach
+# AI Coach System
 
 After each match, the AI Coach analyzes gameplay and provides:
 - match summary
 - strongest move
 - key mistake
-- strategic improvement tips
+- strategic improvement tip
 - performance score
 
 Powered by Lovable AI Gateway.
 
+The AI Coach adapts responses to the selected application language.
+
 ---
 
-# Authentication
+# Authentication System
 
 Supported authentication methods:
 - Guest Mode
 - Google OAuth
 - Email Authentication
 
-Guest users can instantly play without registration.
+Guest Mode allows:
+- instant gameplay
+- optional nickname
+- quick onboarding without registration
 
 ---
 
@@ -85,39 +114,48 @@ Supported languages:
 - Kazakh
 
 The application dynamically translates:
-- UI
 - menus
 - buttons
-- AI Coach
 - notifications
 - game states
+- AI Coach responses
+- profile pages
+- leaderboard
+- challenges
+- premium UI elements
 
 ---
 
 # Dark / Light Theme
 
 Global theme system:
-- Dark cyber-style mode
-- Clean SaaS light mode
+- Premium dark cyber-style mode
+- Modern clean SaaS light mode
 
-Theme changes work across the entire application.
+Theme switching works across the entire application.
 
 ---
 
 # Word Mode (Innovation Feature)
 
-An experimental hybrid mode that combines:
+An experimental hybrid gameplay mode combining:
 - Connect Four
-- Word-building mechanics
+- word-building mechanics
 
 Players can:
-- connect 4 chips
+- connect four chips
 - create words for bonus rewards
 
 Supported in:
 - English
 - Russian
 - Kazakh
+
+This feature was designed to make the gameplay:
+- more strategic
+- educational
+- engaging
+- unique
 
 ---
 
@@ -128,28 +166,28 @@ Strategic challenge mode:
 - Find the best move
 - Block the opponent
 
-Designed to improve strategic thinking.
+Puzzle Mode helps players improve decision-making and strategic thinking.
 
 ---
 
 # Daily Challenges
 
-Players can complete:
-- daily strategic puzzles
-- AI challenges
-- reward-based missions
-
-Rewards include:
+Daily missions and strategic scenarios with:
 - coins
 - XP
-- badges
+- achievement rewards
+
+Examples:
+- defeat Hard AI in limited moves
+- solve tactical situations
+- complete word combinations
 
 ---
 
-# Gamification
+# Gamification System
 
 Includes:
-- XP system
+- XP progression
 - coins
 - achievements
 - levels
@@ -167,6 +205,8 @@ Examples:
 - “Колонка 3”
 - “Үшінші баған”
 
+Voice controls are optional and work alongside normal gameplay controls.
+
 ---
 
 # Leaderboards
@@ -175,6 +215,8 @@ Competitive ranking system:
 - Global leaderboard
 - Country leaderboard
 - City leaderboard
+
+Users can compete with players from around the world.
 
 ---
 
@@ -187,6 +229,8 @@ Design style:
 - Neon cyber accents
 - Smooth animations
 - Mobile-first responsive design
+
+The goal was to create an experience that feels polished, modern, and incubator-demo ready.
 
 ---
 
@@ -216,10 +260,13 @@ Repository:
 
 The application includes:
 - safe error handling
-- secure Supabase authentication
+- secure authentication
 - protected user data
-- responsive mobile support
 - graceful fallback behavior
+- responsive mobile support
+- stable gameplay architecture
+
+The app is designed to remain functional even if AI services temporarily fail.
 
 ---
 
@@ -238,30 +285,31 @@ The application includes:
 
 # Future Improvements
 
-Potential future roadmap:
+Potential roadmap:
 - real multiplayer
 - WebSocket battles
-- advanced ranked matchmaking
 - adaptive AI
+- advanced ranked matchmaking
 - tournament system
 - mobile app version
 - real Stripe payments
-- social sharing
 - AI replay analysis
+- social sharing system
 
 ---
 
-# Why This Project
+# Why This Project Matters
 
-This project was created as part of the nFactorial Incubator technical assignment.
+This project demonstrates:
+- AI product thinking
+- startup MVP development
+- modern frontend architecture
+- gamification design
+- multilingual UX
+- scalable feature planning
+- premium user experience design
 
-The goal was not simply to recreate a basic Connect Four game, but to build a modern AI-era gaming product with:
-- strong UX thinking
-- AI integration
-- gamification
-- product scalability
-- monetization concepts
-- innovative gameplay mechanics
+The project was intentionally designed not as a simple game clone, but as a scalable AI-powered gaming platform.
 
 ---
 
@@ -269,4 +317,4 @@ The goal was not simply to recreate a basic Connect Four game, but to build a mo
 
 Saben Kassenov
 
-Built with Lovable + Supabase + AI tools.
+Built with Lovable, Supabase, and AI tools.
