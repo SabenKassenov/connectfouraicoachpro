@@ -337,6 +337,7 @@ This project demonstrates:
 - premium user experience design
 
 The project was intentionally designed not as a simple game clone, but as a scalable AI-powered gaming platform.
+The product is designed for players who want both entertainment and strategic improvement
 
 ---
 
