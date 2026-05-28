@@ -11,6 +11,7 @@ import {
 import appCss from "../styles.css?url";
 import { ThemeProvider } from "@/lib/theme";
 import { I18nProvider } from "@/lib/i18n";
+import { AuthProvider } from "@/lib/auth";
 import { Toaster } from "@/components/ui/sonner";
 
 function NotFoundComponent() {
@@ -130,9 +131,11 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
         <I18nProvider>
-          {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-          <Outlet />
-          <Toaster richColors position="top-center" />
+          <AuthProvider>
+            {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+            <Outlet />
+            <Toaster richColors position="top-center" />
+          </AuthProvider>
         </I18nProvider>
       </ThemeProvider>
     </QueryClientProvider>
