@@ -2,13 +2,15 @@ import { createFileRoute } from "@tanstack/react-router";
 import { AppShell, GlassCard } from "@/components/AppShell";
 import { useI18n } from "@/lib/i18n";
 import { useProfile, profileActions } from "@/lib/store";
+import { useAuth } from "@/lib/auth";
+import { AuthDialog } from "@/components/AuthDialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Crown, Sparkles } from "lucide-react";
+import { Crown, Sparkles, LogOut, LogIn } from "lucide-react";
 
 export const Route = createFileRoute("/profile")({
   component: ProfilePage,
