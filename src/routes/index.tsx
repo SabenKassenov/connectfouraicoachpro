@@ -1,8 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { AppShell, GlassCard } from "@/components/AppShell";
 import { useI18n } from "@/lib/i18n";
+import { useAuth } from "@/lib/auth";
+import { AuthDialog } from "@/components/AuthDialog";
 import { Button } from "@/components/ui/button";
-import { Brain, Trophy, MessageSquare, Type, Calendar, Sparkles, Gamepad2 } from "lucide-react";
+import { Brain, Trophy, MessageSquare, Type, Calendar, Sparkles, Gamepad2, LogIn } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -20,6 +22,7 @@ export const Route = createFileRoute("/")({
 
 function Landing() {
   const { t } = useI18n();
+  const { user } = useAuth();
   return (
     <AppShell>
       <section className="relative grid items-center gap-10 py-6 lg:grid-cols-2 lg:py-12">
@@ -50,6 +53,19 @@ function Landing() {
               </Link>
             </Button>
           </div>
+          {!user && (
+            <div className="mt-4 flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
+              <span>{t("authSubtitle")}</span>
+              <AuthDialog
+                trigger={
+                  <Button variant="ghost" size="sm" className="rounded-xl">
+                    <LogIn className="mr-1.5 h-4 w-4" />
+                    {t("signIn")}
+                  </Button>
+                }
+              />
+            </div>
+          )}
         </div>
 
         <div className="relative">

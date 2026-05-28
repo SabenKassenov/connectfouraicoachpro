@@ -2,13 +2,15 @@ import { createFileRoute } from "@tanstack/react-router";
 import { AppShell, GlassCard } from "@/components/AppShell";
 import { useI18n } from "@/lib/i18n";
 import { useProfile, profileActions } from "@/lib/store";
+import { useAuth } from "@/lib/auth";
+import { AuthDialog } from "@/components/AuthDialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Crown, Sparkles } from "lucide-react";
+import { Crown, Sparkles, LogOut, LogIn } from "lucide-react";
 
 export const Route = createFileRoute("/profile")({
   component: ProfilePage,
@@ -17,11 +19,13 @@ export const Route = createFileRoute("/profile")({
 function ProfilePage() {
   const { t } = useI18n();
   const p = useProfile();
+  const { user, profile: authProfile, signOut } = useAuth();
+  const displayName = authProfile?.nickname || p.nickname;
   const totalGames = p.wins + p.losses + p.draws;
   const winRate = totalGames ? Math.round((p.wins / totalGames) * 100) : 0;
   const level = Math.floor(p.xp / 100) + 1;
   const xpInLevel = p.xp % 100;
-  const initials = p.nickname.slice(0, 2).toUpperCase();
+  const initials = displayName.slice(0, 2).toUpperCase();
 
   return (
     <AppShell>
@@ -32,7 +36,10 @@ function ProfilePage() {
               {initials}
             </div>
             <div>
-              <div className="text-lg font-bold">{p.nickname}</div>
+              <div className="text-lg font-bold">{displayName}</div>
+              {user?.email && (
+                <div className="text-xs text-muted-foreground">{user.email}</div>
+              )}
               <div className="text-xs text-muted-foreground">
                 {p.city}, {p.country}
               </div>
@@ -90,6 +97,28 @@ function ProfilePage() {
           </div>
 
           <ProDialog isPro={p.isPro} />
+
+          <div className="mt-3">
+            {user ? (
+              <Button
+                onClick={() => signOut()}
+                variant="outline"
+                className="w-full rounded-xl"
+              >
+                <LogOut className="mr-2 h-4 w-4" />
+                {t("signOut")}
+              </Button>
+            ) : (
+              <AuthDialog
+                trigger={
+                  <Button variant="outline" className="w-full rounded-xl">
+                    <LogIn className="mr-2 h-4 w-4" />
+                    {t("signIn")}
+                  </Button>
+                }
+              />
+            )}
+          </div>
         </GlassCard>
 
         <GlassCard className="lg:col-span-2">

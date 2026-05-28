@@ -4,10 +4,14 @@ export type Lang = "en" | "ru" | "kz";
 
 type Dict = Record<string, string>;
 
-const en: Dict = {
+const en = {
+  // App
   appName: "Connect Four AI Coach Pro",
   tagline: "Premium AI-powered Connect Four with a personal coach",
   startPlaying: "Start Playing",
+
+  // Nav
+  home: "Home",
   play: "Play",
   profile: "Profile",
   leaderboard: "Leaderboard",
@@ -15,29 +19,71 @@ const en: Dict = {
   puzzle: "Puzzle Mode",
   shop: "Shop",
   history: "Match History",
-  home: "Home",
+
+  // Game
   difficulty: "Difficulty",
   easy: "Easy",
   medium: "Medium",
   hard: "Hard",
   newGame: "New Game",
+  restartGame: "Restart Game",
   playAgain: "Play Again",
   mainMenu: "Main Menu",
   yourTurn: "Your turn",
-  aiTurn: "AI is thinking…",
+  aiTurn: "AI's turn",
+  aiThinking: "AI is thinking…",
+  columnFull: "Column is full",
   youWin: "YOU WIN",
   youLose: "YOU LOSE",
   draw: "DRAW",
+  hint: "Hint",
+  bestMove: "Best Move",
+  danger: "Danger",
+  score: "Score",
+  performance: "Performance",
+  move: "Move",
+  moves: "Moves",
+
+  // Coach
   aiCoach: "AI Coach",
   analyzing: "Analyzing your game…",
   coachFallback: "Coach is offline. Keep controlling the center and watch for double threats!",
-  hint: "Hint",
-  voice: "Voice",
+  coachLanguageHint: "Reply in English.",
+
+  // Auth
+  authTitle: "Sign in to your account",
+  authSubtitle: "Play instantly as guest, or sign in to save your progress.",
+  signIn: "Sign In",
+  signUp: "Sign Up",
+  signOut: "Sign Out",
+  createAccount: "Create Account",
+  email: "Email",
+  password: "Password",
+  nickname: "Nickname",
+  continueWithGoogle: "Continue with Google",
+  continueWithEmail: "Continue with Email",
+  playAsGuest: "Play as Guest",
+  or: "or",
+  account: "Account",
+  authFailed: "Authentication failed",
+  authMissingFields: "Please fill in all fields",
+  authSignedIn: "Signed in",
+  authAccountCreated: "Account created",
+  authPlayingAsGuest: "Playing as guest",
+  authGoogleUnavailable: "Google sign-in unavailable",
+
+  // Guest
   guestNickname: "Guest nickname",
+  guestNicknamePlaceholder: "Choose a cool name",
+  guestNicknameHint: "Optional — we'll pick one for you if left blank.",
   saveAsGuest: "Continue as Guest",
+
+  // Pro
   upgradePro: "Upgrade to Pro",
   proTitle: "Pro Plan",
   proDesc: "Unlock advanced coaching, exclusive skins and unlimited history.",
+
+  // Features
   features: "Features",
   featAi: "Smart AI Opponent",
   featCoach: "AI Coach Reviews",
@@ -45,9 +91,10 @@ const en: Dict = {
   featWord: "Word Mode",
   featDaily: "Daily Challenges",
   comingSoon: "Coming soon",
+
+  // History / stats
   noGames: "No games yet — play your first match!",
   result: "Result",
-  moves: "Moves",
   date: "Date",
   win: "Win",
   loss: "Loss",
@@ -57,32 +104,56 @@ const en: Dict = {
   losses: "Losses",
   draws: "Draws",
   winRate: "Win rate",
+
+  // Shop
   selectSkin: "Select",
   owned: "Owned",
   buy: "Buy",
   buyFor: "Buy for",
   notEnoughCoins: "Not enough coins",
+
+  // Leaderboard
   globalBoard: "Global",
   country: "Country",
   city: "City",
   rank: "Rank",
   player: "Player",
-  score: "Score",
+
+  // Puzzles / challenges
   pickPuzzle: "Pick a puzzle below",
   solve: "Solve",
   solved: "Solved!",
   challengeOfTheDay: "Challenge of the Day",
   startChallenge: "Start Challenge",
   reward: "Reward",
+
+  // Voice
+  voice: "Voice",
   micActive: "Listening…",
   micOff: "Mic off",
   unsupportedSpeech: "Voice control not supported in this browser",
+
+  // Theme
+  toggleTheme: "Toggle theme",
+  light: "Light",
+  dark: "Dark",
+
+  // Errors / states
+  loading: "Loading…",
+  error: "Something went wrong",
+  retry: "Try again",
+  empty: "Nothing here yet",
+  save: "Save",
+  cancel: "Cancel",
 };
 
-const ru: Dict = {
+type Keys = keyof typeof en;
+
+const ru: Partial<Record<Keys, string>> = {
   appName: "Connect Four AI Coach Pro",
   tagline: "Премиум Четыре в ряд с личным AI-тренером",
   startPlaying: "Начать игру",
+  home: "Главная",
   play: "Играть",
   profile: "Профиль",
   leaderboard: "Таблица лидеров",
@@ -90,25 +161,55 @@ const ru: Dict = {
   puzzle: "Головоломки",
   shop: "Магазин",
   history: "История матчей",
-  home: "Главная",
   difficulty: "Сложность",
   easy: "Лёгкий",
   medium: "Средний",
   hard: "Сложный",
   newGame: "Новая игра",
+  restartGame: "Перезапуск",
   playAgain: "Играть снова",
   mainMenu: "Главное меню",
   yourTurn: "Ваш ход",
-  aiTurn: "AI думает…",
+  aiTurn: "Ход AI",
+  aiThinking: "AI думает…",
+  columnFull: "Колонка заполнена",
   youWin: "ПОБЕДА",
   youLose: "ПОРАЖЕНИЕ",
   draw: "НИЧЬЯ",
+  hint: "Подсказка",
+  bestMove: "Лучший ход",
+  danger: "Опасность",
+  score: "Счёт",
+  performance: "Эффективность",
+  move: "Ход",
+  moves: "Ходы",
   aiCoach: "AI Тренер",
   analyzing: "Анализирую партию…",
   coachFallback: "Тренер недоступен. Контролируйте центр и следите за двойными угрозами!",
-  hint: "Подсказка",
-  voice: "Голос",
+  coachLanguageHint: "Отвечай на русском языке.",
+  authTitle: "Вход в аккаунт",
+  authSubtitle: "Играйте как гость или войдите, чтобы сохранять прогресс.",
+  signIn: "Войти",
+  signUp: "Регистрация",
+  signOut: "Выйти",
+  createAccount: "Создать аккаунт",
+  email: "Эл. почта",
+  password: "Пароль",
+  nickname: "Никнейм",
+  continueWithGoogle: "Войти через Google",
+  continueWithEmail: "Войти по эл. почте",
+  playAsGuest: "Играть как гость",
+  or: "или",
+  account: "Аккаунт",
+  authFailed: "Ошибка авторизации",
+  authMissingFields: "Заполните все поля",
+  authSignedIn: "Вы вошли",
+  authAccountCreated: "Аккаунт создан",
+  authPlayingAsGuest: "Играете как гость",
+  authGoogleUnavailable: "Google-вход недоступен",
   guestNickname: "Имя гостя",
+  guestNicknamePlaceholder: "Придумайте крутое имя",
+  guestNicknameHint: "Необязательно — мы придумаем имя автоматически.",
   saveAsGuest: "Войти как гость",
   upgradePro: "Перейти на Pro",
   proTitle: "Тариф Pro",
@@ -122,7 +223,6 @@ const ru: Dict = {
   comingSoon: "Скоро",
   noGames: "Ещё нет игр — сыграйте первый матч!",
   result: "Результат",
-  moves: "Ходы",
   date: "Дата",
   win: "Победа",
   loss: "Поражение",
@@ -142,22 +242,32 @@ const ru: Dict = {
   city: "Город",
   rank: "Место",
   player: "Игрок",
-  score: "Счёт",
   pickPuzzle: "Выберите головоломку",
   solve: "Решить",
   solved: "Решено!",
   challengeOfTheDay: "Задание дня",
   startChallenge: "Начать",
   reward: "Награда",
+  voice: "Голос",
   micActive: "Слушаю…",
   micOff: "Микрофон выключен",
   unsupportedSpeech: "Голосовой ввод не поддерживается",
+  toggleTheme: "Переключить тему",
+  light: "Светлая",
+  dark: "Тёмная",
+  loading: "Загрузка…",
+  error: "Что-то пошло не так",
+  retry: "Повторить",
+  empty: "Здесь пока пусто",
+  save: "Сохранить",
+  cancel: "Отмена",
 };
 
-const kz: Dict = {
+const kz: Partial<Record<Keys, string>> = {
   appName: "Connect Four AI Coach Pro",
   tagline: "AI жаттықтырушысы бар премиум Connect Four",
   startPlaying: "Ойнауды бастау",
+  home: "Басты",
   play: "Ойнау",
   profile: "Профиль",
   leaderboard: "Көшбасшылар",
@@ -165,25 +275,55 @@ const kz: Dict = {
   puzzle: "Басқатырғыштар",
   shop: "Дүкен",
   history: "Ойын тарихы",
-  home: "Басты",
   difficulty: "Қиындық",
   easy: "Оңай",
   medium: "Орташа",
   hard: "Қиын",
   newGame: "Жаңа ойын",
+  restartGame: "Қайта бастау",
   playAgain: "Қайта ойнау",
   mainMenu: "Басты мәзір",
   yourTurn: "Сіздің жүрісіңіз",
-  aiTurn: "AI ойланып жатыр…",
+  aiTurn: "AI жүрісі",
+  aiThinking: "AI ойланып жатыр…",
+  columnFull: "Бағана толы",
   youWin: "ЖЕҢІС",
   youLose: "ЖЕҢІЛІС",
   draw: "ТЕҢ",
+  hint: "Кеңес",
+  bestMove: "Үздік жүріс",
+  danger: "Қауіп",
+  score: "Ұпай",
+  performance: "Тиімділік",
+  move: "Жүріс",
+  moves: "Жүрістер",
   aiCoach: "AI Жаттықтырушы",
   analyzing: "Ойын талданып жатыр…",
   coachFallback: "Жаттықтырушы қазір қолжетімсіз. Орталықты бақылаңыз!",
-  hint: "Кеңес",
-  voice: "Дауыс",
+  coachLanguageHint: "Қазақ тілінде жауап бер.",
+  authTitle: "Аккаунтқа кіру",
+  authSubtitle: "Қонақ ретінде ойнаңыз немесе прогресті сақтау үшін кіріңіз.",
+  signIn: "Кіру",
+  signUp: "Тіркелу",
+  signOut: "Шығу",
+  createAccount: "Аккаунт құру",
+  email: "Эл. пошта",
+  password: "Құпиясөз",
+  nickname: "Лақап ат",
+  continueWithGoogle: "Google арқылы кіру",
+  continueWithEmail: "Эл. пошта арқылы кіру",
+  playAsGuest: "Қонақ ретінде ойнау",
+  or: "немесе",
+  account: "Аккаунт",
+  authFailed: "Авторизация қатесі",
+  authMissingFields: "Барлық өрістерді толтырыңыз",
+  authSignedIn: "Сіз кірдіңіз",
+  authAccountCreated: "Аккаунт құрылды",
+  authPlayingAsGuest: "Қонақ ретінде ойнап жатырсыз",
+  authGoogleUnavailable: "Google-мен кіру қолжетімсіз",
   guestNickname: "Қонақ аты",
+  guestNicknamePlaceholder: "Әдемі ат таңдаңыз",
+  guestNicknameHint: "Міндетті емес — біз сізге ат таңдаймыз.",
   saveAsGuest: "Қонақ ретінде кіру",
   upgradePro: "Pro-ға ауысу",
   proTitle: "Pro тарифі",
@@ -197,7 +337,6 @@ const kz: Dict = {
   comingSoon: "Жақында",
   noGames: "Әлі ойын жоқ — алғашқы матчты ойнаңыз!",
   result: "Нәтиже",
-  moves: "Жүрістер",
   date: "Күні",
   win: "Жеңіс",
   loss: "Жеңіліс",
@@ -217,24 +356,33 @@ const kz: Dict = {
   city: "Қала",
   rank: "Орын",
   player: "Ойыншы",
-  score: "Ұпай",
   pickPuzzle: "Басқатырғыш таңдаңыз",
   solve: "Шешу",
   solved: "Шешілді!",
   challengeOfTheDay: "Күн тапсырмасы",
   startChallenge: "Бастау",
   reward: "Сыйлық",
+  voice: "Дауыс",
   micActive: "Тыңдап тұрмын…",
   micOff: "Микрофон өшірулі",
   unsupportedSpeech: "Дауыспен басқару қолдау таппайды",
+  toggleTheme: "Тақырыпты ауыстыру",
+  light: "Ашық",
+  dark: "Қараңғы",
+  loading: "Жүктелуде…",
+  error: "Қате кетті",
+  retry: "Қайталау",
+  empty: "Әзірше бос",
+  save: "Сақтау",
+  cancel: "Бас тарту",
 };
 
-const dicts: Record<Lang, Dict> = { en, ru, kz };
+const dicts: Record<Lang, Partial<Record<Keys, string>>> = { en, ru, kz };
 
 type Ctx = {
   lang: Lang;
   setLang: (l: Lang) => void;
-  t: (key: keyof typeof en) => string;
+  t: (key: Keys) => string;
 };
 
 const I18nContext = React.createContext<Ctx | null>(null);
@@ -242,15 +390,16 @@ const I18nContext = React.createContext<Ctx | null>(null);
 export function I18nProvider({ children }: { children: React.ReactNode }) {
   const [lang, setLangState] = React.useState<Lang>("en");
   React.useEffect(() => {
-    const saved = (typeof window !== "undefined" && localStorage.getItem("c4_lang")) as Lang | null;
-    if (saved && (saved === "en" || saved === "ru" || saved === "kz")) setLangState(saved);
+    const saved =
+      (typeof window !== "undefined" && localStorage.getItem("c4_lang")) as Lang | null;
+    if (saved === "en" || saved === "ru" || saved === "kz") setLangState(saved);
   }, []);
-  const setLang = (l: Lang) => {
+  const setLang = React.useCallback((l: Lang) => {
     setLangState(l);
     if (typeof window !== "undefined") localStorage.setItem("c4_lang", l);
-  };
+  }, []);
   const t = React.useCallback(
-    (key: keyof typeof en) => dicts[lang][key] ?? en[key] ?? String(key),
+    (key: Keys) => dicts[lang][key] ?? en[key] ?? String(key),
     [lang],
   );
   return <I18nContext.Provider value={{ lang, setLang, t }}>{children}</I18nContext.Provider>;

@@ -1,9 +1,24 @@
 import * as React from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
-import { Moon, Sun, Gamepad2, Trophy, User, Sparkles, Calendar, Puzzle, ShoppingBag, History } from "lucide-react";
+import {
+  Moon,
+  Sun,
+  Gamepad2,
+  Trophy,
+  User,
+  Sparkles,
+  Calendar,
+  Puzzle,
+  ShoppingBag,
+  History,
+  LogIn,
+  LogOut,
+} from "lucide-react";
 import { useTheme } from "@/lib/theme";
 import { useI18n, type Lang } from "@/lib/i18n";
 import { useProfile } from "@/lib/store";
+import { useAuth } from "@/lib/auth";
+import { AuthDialog } from "@/components/AuthDialog";
 import { Button } from "@/components/ui/button";
 import {
   Select,
@@ -12,6 +27,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const navItems = [
   { to: "/", labelKey: "home" as const, icon: Sparkles },
@@ -92,11 +115,13 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               variant="ghost"
               size="icon"
               onClick={toggle}
-              aria-label="Toggle theme"
+              aria-label={t("toggleTheme")}
+              title={t("toggleTheme")}
               className="rounded-xl"
             >
               {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
             </Button>
+            <AuthMenu />
           </div>
         </div>
 
@@ -145,5 +170,65 @@ export function GlassCard({
     >
       {children}
     </div>
+  );
+}
+
+function AuthMenu() {
+  const { t } = useI18n();
+  const { user, profile, signOut, ready } = useAuth();
+  const localProfile = useProfile();
+
+  if (!ready) return null;
+
+  if (!user) {
+    return (
+      <AuthDialog
+        trigger={
+          <Button size="sm" className="rounded-xl">
+            <LogIn className="mr-1.5 h-4 w-4" />
+            {t("signIn")}
+          </Button>
+        }
+      />
+    );
+  }
+
+  const name = profile?.nickname || localProfile.nickname;
+  const initials = name.slice(0, 2).toUpperCase();
+  const avatar = profile?.avatar_url;
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="ghost" size="sm" className="rounded-xl px-2">
+          {avatar ? (
+            <img
+              src={avatar}
+              alt={name}
+              className="mr-1.5 h-6 w-6 rounded-full object-cover"
+            />
+          ) : (
+            <div className="mr-1.5 grid h-6 w-6 place-items-center rounded-full bg-gradient-to-br from-cyan-400 to-fuchsia-500 text-[10px] font-bold text-white">
+              {initials}
+            </div>
+          )}
+          <span className="hidden max-w-[100px] truncate sm:inline">{name}</span>
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end" className="w-48">
+        <DropdownMenuLabel className="truncate">{name}</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem asChild>
+          <Link to="/profile">
+            <User className="mr-2 h-4 w-4" />
+            {t("profile")}
+          </Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => signOut()}>
+          <LogOut className="mr-2 h-4 w-4" />
+          {t("signOut")}
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 }
