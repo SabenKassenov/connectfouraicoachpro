@@ -172,3 +172,63 @@ export function GlassCard({
     </div>
   );
 }
+
+function AuthMenu() {
+  const { t } = useI18n();
+  const { user, profile, signOut, ready } = useAuth();
+  const localProfile = useProfile();
+
+  if (!ready) return null;
+
+  if (!user) {
+    return (
+      <AuthDialog
+        trigger={
+          <Button size="sm" className="rounded-xl">
+            <LogIn className="mr-1.5 h-4 w-4" />
+            {t("signIn")}
+          </Button>
+        }
+      />
+    );
+  }
+
+  const name = profile?.nickname || localProfile.nickname;
+  const initials = name.slice(0, 2).toUpperCase();
+  const avatar = profile?.avatar_url;
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="ghost" size="sm" className="rounded-xl px-2">
+          {avatar ? (
+            <img
+              src={avatar}
+              alt={name}
+              className="mr-1.5 h-6 w-6 rounded-full object-cover"
+            />
+          ) : (
+            <div className="mr-1.5 grid h-6 w-6 place-items-center rounded-full bg-gradient-to-br from-cyan-400 to-fuchsia-500 text-[10px] font-bold text-white">
+              {initials}
+            </div>
+          )}
+          <span className="hidden max-w-[100px] truncate sm:inline">{name}</span>
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end" className="w-48">
+        <DropdownMenuLabel className="truncate">{name}</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem asChild>
+          <Link to="/profile">
+            <User className="mr-2 h-4 w-4" />
+            {t("profile")}
+          </Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => signOut()}>
+          <LogOut className="mr-2 h-4 w-4" />
+          {t("signOut")}
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
