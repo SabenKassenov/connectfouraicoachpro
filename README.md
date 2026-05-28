@@ -1,5 +1,10 @@
+# Screenshots
+
+## Landing Page
 <img width="1877" height="850" alt="Landing Page" src="https://github.com/user-attachments/assets/0807e906-2593-465c-819f-eae40467c9b5" />
+## Gameplay
 <img width="1862" height="855" alt="Gameplay" src="https://github.com/user-attachments/assets/2a35f376-f1ab-4824-a93a-37e0ddb5e74a" />
+## AI Coach Review
 <img width="1888" height="859" alt="AI Coach" src="https://github.com/user-attachments/assets/0206a62d-ac11-416e-838b-6100a326e584" />
 <img width="1858" height="850" alt="Leaderboard" src="https://github.com/user-attachments/assets/3b3fcee6-3933-42b8-8331-3fb9f2a5c213" />
 <img width="1262" height="570" alt="Dark theme" src="https://github.com/user-attachments/assets/7518a21a-09e6-4e57-b060-13fe9e5b7898" />
