@@ -19,11 +19,13 @@ export const Route = createFileRoute("/profile")({
 function ProfilePage() {
   const { t } = useI18n();
   const p = useProfile();
+  const { user, profile: authProfile, signOut } = useAuth();
+  const displayName = authProfile?.nickname || p.nickname;
   const totalGames = p.wins + p.losses + p.draws;
   const winRate = totalGames ? Math.round((p.wins / totalGames) * 100) : 0;
   const level = Math.floor(p.xp / 100) + 1;
   const xpInLevel = p.xp % 100;
-  const initials = p.nickname.slice(0, 2).toUpperCase();
+  const initials = displayName.slice(0, 2).toUpperCase();
 
   return (
     <AppShell>
