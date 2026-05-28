@@ -1,8 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { AppShell, GlassCard } from "@/components/AppShell";
 import { useI18n } from "@/lib/i18n";
+import { useAuth } from "@/lib/auth";
+import { AuthDialog } from "@/components/AuthDialog";
 import { Button } from "@/components/ui/button";
-import { Brain, Trophy, MessageSquare, Type, Calendar, Sparkles, Gamepad2 } from "lucide-react";
+import { Brain, Trophy, MessageSquare, Type, Calendar, Sparkles, Gamepad2, LogIn } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
