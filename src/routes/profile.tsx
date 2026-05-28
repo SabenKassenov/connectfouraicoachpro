@@ -36,7 +36,10 @@ function ProfilePage() {
               {initials}
             </div>
             <div>
-              <div className="text-lg font-bold">{p.nickname}</div>
+              <div className="text-lg font-bold">{displayName}</div>
+              {user?.email && (
+                <div className="text-xs text-muted-foreground">{user.email}</div>
+              )}
               <div className="text-xs text-muted-foreground">
                 {p.city}, {p.country}
               </div>
