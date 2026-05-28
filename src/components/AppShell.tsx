@@ -1,9 +1,24 @@
 import * as React from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
-import { Moon, Sun, Gamepad2, Trophy, User, Sparkles, Calendar, Puzzle, ShoppingBag, History } from "lucide-react";
+import {
+  Moon,
+  Sun,
+  Gamepad2,
+  Trophy,
+  User,
+  Sparkles,
+  Calendar,
+  Puzzle,
+  ShoppingBag,
+  History,
+  LogIn,
+  LogOut,
+} from "lucide-react";
 import { useTheme } from "@/lib/theme";
 import { useI18n, type Lang } from "@/lib/i18n";
 import { useProfile } from "@/lib/store";
+import { useAuth } from "@/lib/auth";
+import { AuthDialog } from "@/components/AuthDialog";
 import { Button } from "@/components/ui/button";
 import {
   Select,
@@ -12,6 +27,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const navItems = [
   { to: "/", labelKey: "home" as const, icon: Sparkles },
