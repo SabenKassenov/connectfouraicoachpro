@@ -86,6 +86,11 @@ function PlayPage() {
   const [board, setBoard] = React.useState<Board>(emptyBoard);
   const [turn, setTurn] = React.useState<Cell>(1);
   const [difficulty, setDifficulty] = React.useState<Difficulty>("medium");
+  const [mode, setMode] = React.useState<"classic" | "word">("classic");
+  const [letters, setLetters] = React.useState<Letters>(emptyLetters);
+  const [bonusCells, setBonusCells] = React.useState<[number, number][]>([]);
+  const [bonusWords, setBonusWords] = React.useState<string[]>([]);
+  const foundWordKeysRef = React.useRef<Set<string>>(new Set());
   const [aiThinking, setAiThinking] = React.useState(false);
   const [win, setWin] = React.useState<WinInfo>(null);
   const [draw, setDraw] = React.useState(false);
