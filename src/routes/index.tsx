@@ -53,6 +53,19 @@ function Landing() {
               </Link>
             </Button>
           </div>
+          {!user && (
+            <div className="mt-4 flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
+              <span>{t("authSubtitle")}</span>
+              <AuthDialog
+                trigger={
+                  <Button variant="ghost" size="sm" className="rounded-xl">
+                    <LogIn className="mr-1.5 h-4 w-4" />
+                    {t("signIn")}
+                  </Button>
+                }
+              />
+            </div>
+          )}
         </div>
 
         <div className="relative">
