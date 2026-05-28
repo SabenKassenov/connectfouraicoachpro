@@ -115,11 +115,13 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               variant="ghost"
               size="icon"
               onClick={toggle}
-              aria-label="Toggle theme"
+              aria-label={t("toggleTheme")}
+              title={t("toggleTheme")}
               className="rounded-xl"
             >
               {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
             </Button>
+            <AuthMenu />
           </div>
         </div>
 
