@@ -1,3 +1,5 @@
+<img width="1801" height="828" alt="Pro Plan" src="https://github.com/user-attachments/assets/55047266-4bb5-4789-b027-00b4c8476a24" />
+<img width="1859" height="856" alt="Statistics" src="https://github.com/user-attachments/assets/f7fd2085-2da2-4d78-ad54-1abd7f06759a" />
 <img width="1877" height="850" alt="Landing Page" src="https://github.com/user-attachments/assets/0807e906-2593-465c-819f-eae40467c9b5" />
 <img width="1862" height="855" alt="Gameplay" src="https://github.com/user-attachments/assets/2a35f376-f1ab-4824-a93a-37e0ddb5e74a" />
 <img width="1888" height="859" alt="AI Coach" src="https://github.com/user-attachments/assets/0206a62d-ac11-416e-838b-6100a326e584" />
