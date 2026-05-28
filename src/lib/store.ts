@@ -109,7 +109,10 @@ export function useProfile() {
   React.useEffect(() => {
     store.hydrate();
     setS(store.state);
-    return store.subscribe(setS);
+    const unsub = store.subscribe(setS);
+    return () => {
+      unsub();
+    };
   }, []);
   return s;
 }
