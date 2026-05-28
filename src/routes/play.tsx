@@ -30,7 +30,8 @@ import {
   type WinInfo,
 } from "@/lib/game";
 import { buildCoachReview } from "@/lib/coach";
-import { Lightbulb, Mic, MicOff, RotateCcw, Volume2, VolumeX } from "lucide-react";
+import { detectWords, emptyLetters, randomLetter, type Letters } from "@/lib/words";
+import { Lightbulb, Mic, MicOff, RotateCcw, Type, Volume2, VolumeX } from "lucide-react";
 import { useVoiceColumns } from "@/lib/useVoice";
 import { playSound, isMuted, setMuted } from "@/lib/sound";
 import { toast } from "sonner";
@@ -85,6 +86,11 @@ function PlayPage() {
   const [board, setBoard] = React.useState<Board>(emptyBoard);
   const [turn, setTurn] = React.useState<Cell>(1);
   const [difficulty, setDifficulty] = React.useState<Difficulty>("medium");
+  const [mode, setMode] = React.useState<"classic" | "word">("classic");
+  const [letters, setLetters] = React.useState<Letters>(emptyLetters);
+  const [bonusCells, setBonusCells] = React.useState<[number, number][]>([]);
+  const [bonusWords, setBonusWords] = React.useState<string[]>([]);
+  const foundWordKeysRef = React.useRef<Set<string>>(new Set());
   const [aiThinking, setAiThinking] = React.useState(false);
   const [win, setWin] = React.useState<WinInfo>(null);
   const [draw, setDraw] = React.useState(false);
@@ -137,12 +143,19 @@ function PlayPage() {
     if (!ended || !result || finishedRef.current) return;
     finishedRef.current = true;
     playSound(result === "win" ? "win" : "click");
-    const review = buildCoachReview({
+    const baseReview = buildCoachReview({
       result,
       difficulty,
       moves: movesLog,
       finalBoard: board,
     });
+    const review: CoachReview =
+      mode === "word" && bonusWords.length
+        ? {
+            ...baseReview,
+            summary: `${baseReview.summary} ${t("wordBonus")}: ${bonusWords.join(", ")}.`,
+          }
+        : baseReview;
     setReviewLoading(true);
     setReviewError(null);
     // Simulate small async delay to mimic AI gateway latency
@@ -160,7 +173,49 @@ function PlayPage() {
     else if (result === "loss") toast.error(t("youLose"), { description: review.summary });
     else toast(t("draw"), { description: review.summary });
     return () => clearTimeout(timer);
-  }, [ended, result, board, difficulty, movesLog, t]);
+  }, [ended, result, board, difficulty, movesLog, t, mode, bonusWords]);
+
+  // Place a letter for the just-dropped chip and detect new words. Safe no-op in classic mode.
+  const applyWordEffects = React.useCallback(
+    (nextBoard: Board, placed: { row: number; col: number }) => {
+      if (mode !== "word") return;
+      try {
+        const newLetters = letters.map((row) => [...row]);
+        newLetters[placed.row][placed.col] = randomLetter(lang);
+        setLetters(newLetters);
+        const found = detectWords(newLetters, lang);
+        const fresh: { word: string; cells: [number, number][] }[] = [];
+        for (const f of found) {
+          const key =
+            f.word +
+            "|" +
+            f.cells.map(([r, c]) => `${r}:${c}`).join(",");
+          if (!foundWordKeysRef.current.has(key)) {
+            foundWordKeysRef.current.add(key);
+            fresh.push(f);
+          }
+        }
+        if (fresh.length) {
+          const allCells: [number, number][] = [];
+          for (const f of fresh) for (const c of f.cells) allCells.push(c);
+          setBonusCells((prev) => [...prev, ...allCells]);
+          const words = fresh.map((f) => f.word);
+          setBonusWords((prev) => [...prev, ...words]);
+          const reward = fresh.length * 10;
+          profileActions.addCoins(reward);
+          toast.success(`${t("wordDetected")}: ${words.join(", ")}`, {
+            description: `+${reward} ${t("bonusCoins")}`,
+          });
+          setTimeout(() => setBonusCells([]), 2500);
+        }
+      } catch {
+        /* word mode is optional — never break classic play */
+      }
+      // Avoid unused: ensure nextBoard is referenced
+      void nextBoard;
+    },
+    [mode, letters, lang, t],
+  );
 
   const playerMove = React.useCallback(
     (col: number) => {
@@ -174,6 +229,7 @@ function PlayPage() {
       setLastMove(placed);
       setHintCol(null);
       setMovesLog((m) => [...m, { col, player: 1 }]);
+      applyWordEffects(next, placed);
       const w = checkWin(next);
       if (w) {
         setWin(w);
@@ -185,7 +241,7 @@ function PlayPage() {
       }
       setTurn(2);
     },
-    [board, ended, aiThinking, turn],
+    [board, ended, aiThinking, turn, applyWordEffects],
   );
 
   // AI turn
@@ -209,6 +265,7 @@ function PlayPage() {
       setBoard(next);
       setLastMove(placed);
       setMovesLog((m) => [...m, { col, player: 2 }]);
+      applyWordEffects(next, placed);
       const w = checkWin(next);
       if (w) setWin(w);
       else if (isDraw(next)) setDraw(true);
@@ -216,7 +273,7 @@ function PlayPage() {
       setAiThinking(false);
     }, delay);
     return () => clearTimeout(id);
-  }, [turn, ended, board, difficulty]);
+  }, [turn, ended, board, difficulty, applyWordEffects]);
 
   const reset = React.useCallback(() => {
     setBoard(emptyBoard());
@@ -229,6 +286,10 @@ function PlayPage() {
     setReview(null);
     setReviewError(null);
     setReviewLoading(false);
+    setLetters(emptyLetters());
+    setBonusCells([]);
+    setBonusWords([]);
+    foundWordKeysRef.current = new Set();
     finishedRef.current = false;
     saveGame(null);
   }, []);
@@ -257,7 +318,7 @@ function PlayPage() {
         <div>
           <GlassCard className="relative overflow-hidden">
             <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
-              <div className="flex items-center gap-2">
+              <div className="flex flex-wrap items-center gap-2">
                 <span className="text-xs uppercase tracking-wider text-muted-foreground">
                   {t("difficulty")}
                 </span>
@@ -268,13 +329,35 @@ function PlayPage() {
                     reset();
                   }}
                 >
-                  <SelectTrigger className="h-9 w-[130px] rounded-xl">
+                  <SelectTrigger className="h-9 w-[120px] rounded-xl">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="easy">{t("easy")}</SelectItem>
                     <SelectItem value="medium">{t("medium")}</SelectItem>
                     <SelectItem value="hard">{t("hard")}</SelectItem>
+                  </SelectContent>
+                </Select>
+                <span className="ml-1 text-xs uppercase tracking-wider text-muted-foreground">
+                  {t("mode")}
+                </span>
+                <Select
+                  value={mode}
+                  onValueChange={(v) => {
+                    setMode(v as "classic" | "word");
+                    reset();
+                  }}
+                >
+                  <SelectTrigger className="h-9 w-[150px] rounded-xl">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="classic">{t("classicMode")}</SelectItem>
+                    <SelectItem value="word">
+                      <span className="inline-flex items-center gap-1.5">
+                        <Type className="h-3.5 w-3.5" /> {t("wordMode")}
+                      </span>
+                    </SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -319,16 +402,25 @@ function PlayPage() {
                 hintCol={hintCol}
                 lastMove={lastMove}
                 skin={profile.selectedSkin}
+                letters={mode === "word" ? letters : null}
+                bonusCells={mode === "word" ? bonusCells : []}
               />
               {ended && result && <EndOverlay result={result} onPlayAgain={reset} />}
             </div>
+
+            {mode === "word" && (
+              <div className="mt-3 flex items-start gap-2 rounded-xl border border-amber-300/30 bg-amber-400/10 px-3 py-2 text-xs text-amber-200">
+                <Type className="mt-0.5 h-3.5 w-3.5 shrink-0" />
+                <span>{t("wordModeTip")}</span>
+              </div>
+            )}
 
             <div className="mt-4 flex items-center justify-between text-xs text-muted-foreground">
               <span>
                 {t("moves")}: {movesLog.length}
               </span>
               <span className="hidden sm:inline">
-                Tip: click a column to drop your chip
+                {mode === "word" ? t("formWordsHint") : "Tip: click a column to drop your chip"}
               </span>
             </div>
           </GlassCard>

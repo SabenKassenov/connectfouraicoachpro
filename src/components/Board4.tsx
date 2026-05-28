@@ -12,6 +12,8 @@ type Props = {
   hintCol?: number | null;
   lastMove?: { row: number; col: number } | null;
   skin?: Skin;
+  letters?: (string | null)[][] | null;
+  bonusCells?: [number, number][];
 };
 
 export function Board4({
@@ -22,6 +24,8 @@ export function Board4({
   hintCol,
   lastMove,
   skin = "classic",
+  letters = null,
+  bonusCells = [],
 }: Props) {
   const [hover, setHover] = React.useState<number | null>(null);
   const skinDef = getSkin(skin);
@@ -31,6 +35,12 @@ export function Board4({
     if (win) for (const [r, c] of win.cells) s.add(`${r}:${c}`);
     return s;
   }, [win]);
+
+  const bonusSet = React.useMemo(() => {
+    const s = new Set<string>();
+    for (const [r, c] of bonusCells) s.add(`${r}:${c}`);
+    return s;
+  }, [bonusCells]);
 
   return (
     <div
@@ -45,8 +55,10 @@ export function Board4({
           const c = idx % COLS;
           const cell = board[r][c] as Cell;
           const isWin = winSet.has(`${r}:${c}`);
+          const isBonus = !isWin && bonusSet.has(`${r}:${c}`);
           const isLast = lastMove && lastMove.row === r && lastMove.col === c;
           const isHintCol = hintCol === c && r === 0;
+          const letter = letters?.[r]?.[c] ?? null;
           return (
             <button
               key={idx}
@@ -61,7 +73,7 @@ export function Board4({
             >
               {cell !== 0 && (
                 <span
-                  className={`block h-[86%] w-[86%] rounded-full ${
+                  className={`relative grid h-[86%] w-[86%] place-items-center rounded-full ${
                     cell === 1 ? skinDef.player : skinDef.ai
                   } ${isLast ? "animate-[chipDrop_400ms_ease-out]" : ""}`}
                   style={
@@ -70,9 +82,23 @@ export function Board4({
                           boxShadow: `0 0 0 3px ${skinDef.glow}, 0 0 24px ${skinDef.glow}`,
                           animation: "winPulse 1.4s ease-in-out infinite",
                         }
-                      : undefined
+                      : isBonus
+                        ? {
+                            boxShadow:
+                              "0 0 0 2px rgba(250, 204, 21, 0.85), 0 0 18px rgba(250, 204, 21, 0.6)",
+                          }
+                        : undefined
                   }
-                />
+                >
+                  {letter && (
+                    <span
+                      className="select-none text-[clamp(10px,3.4vw,22px)] font-black uppercase tracking-tight text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]"
+                      aria-hidden="true"
+                    >
+                      {letter}
+                    </span>
+                  )}
+                </span>
               )}
               {isHintCol && cell === 0 && (
                 <span className="pointer-events-none absolute inset-2 rounded-full border-2 border-dashed border-cyan-300/80 animate-pulse" />
