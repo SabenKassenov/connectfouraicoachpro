@@ -402,16 +402,25 @@ function PlayPage() {
                 hintCol={hintCol}
                 lastMove={lastMove}
                 skin={profile.selectedSkin}
+                letters={mode === "word" ? letters : null}
+                bonusCells={mode === "word" ? bonusCells : []}
               />
               {ended && result && <EndOverlay result={result} onPlayAgain={reset} />}
             </div>
+
+            {mode === "word" && (
+              <div className="mt-3 flex items-start gap-2 rounded-xl border border-amber-300/30 bg-amber-400/10 px-3 py-2 text-xs text-amber-200">
+                <Type className="mt-0.5 h-3.5 w-3.5 shrink-0" />
+                <span>{t("wordModeTip")}</span>
+              </div>
+            )}
 
             <div className="mt-4 flex items-center justify-between text-xs text-muted-foreground">
               <span>
                 {t("moves")}: {movesLog.length}
               </span>
               <span className="hidden sm:inline">
-                Tip: click a column to drop your chip
+                {mode === "word" ? t("formWordsHint") : "Tip: click a column to drop your chip"}
               </span>
             </div>
           </GlassCard>
