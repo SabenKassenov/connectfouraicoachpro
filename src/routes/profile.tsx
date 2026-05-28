@@ -97,6 +97,28 @@ function ProfilePage() {
           </div>
 
           <ProDialog isPro={p.isPro} />
+
+          <div className="mt-3">
+            {user ? (
+              <Button
+                onClick={() => signOut()}
+                variant="outline"
+                className="w-full rounded-xl"
+              >
+                <LogOut className="mr-2 h-4 w-4" />
+                {t("signOut")}
+              </Button>
+            ) : (
+              <AuthDialog
+                trigger={
+                  <Button variant="outline" className="w-full rounded-xl">
+                    <LogIn className="mr-2 h-4 w-4" />
+                    {t("signIn")}
+                  </Button>
+                }
+              />
+            )}
+          </div>
         </GlassCard>
 
         <GlassCard className="lg:col-span-2">
