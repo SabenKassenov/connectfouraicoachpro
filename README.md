@@ -1,11 +1,11 @@
-<img width="1858" height="867" alt="Word Mode" src="https://github.com/user-attachments/assets/11c1b764-79b6-4dd1-a76e-e523249b3a84" />
-<img width="1873" height="819" alt="Features" src="https://github.com/user-attachments/assets/89ea74dc-5d88-44a6-b284-56a831fb8f3b" />
-<img width="1257" height="558" alt="Light theme" src="https://github.com/user-attachments/assets/9d65fa7c-3ce4-4c58-8e4d-c07b2455986f" />
-<img width="1262" height="570" alt="Dark theme" src="https://github.com/user-attachments/assets/7518a21a-09e6-4e57-b060-13fe9e5b7898" />
-<img width="1858" height="850" alt="Leaderboard" src="https://github.com/user-attachments/assets/3b3fcee6-3933-42b8-8331-3fb9f2a5c213" />
-<img width="1888" height="859" alt="AI Coach" src="https://github.com/user-attachments/assets/0206a62d-ac11-416e-838b-6100a326e584" />
-<img width="1862" height="855" alt="Gameplay" src="https://github.com/user-attachments/assets/2a35f376-f1ab-4824-a93a-37e0ddb5e74a" />
 <img width="1877" height="850" alt="Landing Page" src="https://github.com/user-attachments/assets/0807e906-2593-465c-819f-eae40467c9b5" />
+<img width="1862" height="855" alt="Gameplay" src="https://github.com/user-attachments/assets/2a35f376-f1ab-4824-a93a-37e0ddb5e74a" />
+<img width="1888" height="859" alt="AI Coach" src="https://github.com/user-attachments/assets/0206a62d-ac11-416e-838b-6100a326e584" />
+<img width="1858" height="850" alt="Leaderboard" src="https://github.com/user-attachments/assets/3b3fcee6-3933-42b8-8331-3fb9f2a5c213" />
+<img width="1262" height="570" alt="Dark theme" src="https://github.com/user-attachments/assets/7518a21a-09e6-4e57-b060-13fe9e5b7898" />
+<img width="1257" height="558" alt="Light theme" src="https://github.com/user-attachments/assets/9d65fa7c-3ce4-4c58-8e4d-c07b2455986f" />
+<img width="1873" height="819" alt="Features" src="https://github.com/user-attachments/assets/89ea74dc-5d88-44a6-b284-56a831fb8f3b" />
+<img width="1858" height="867" alt="Word Mode" src="https://github.com/user-attachments/assets/11c1b764-79b6-4dd1-a76e-e523249b3a84" />
 # Connect Four AI Coach Pro
 
 A premium AI-powered Connect Four strategy platform built as an incubator-ready startup MVP.
