@@ -30,7 +30,8 @@ import {
   type WinInfo,
 } from "@/lib/game";
 import { buildCoachReview } from "@/lib/coach";
-import { Lightbulb, Mic, MicOff, RotateCcw, Volume2, VolumeX } from "lucide-react";
+import { detectWords, emptyLetters, randomLetter, type Letters } from "@/lib/words";
+import { Lightbulb, Mic, MicOff, RotateCcw, Type, Volume2, VolumeX } from "lucide-react";
 import { useVoiceColumns } from "@/lib/useVoice";
 import { playSound, isMuted, setMuted } from "@/lib/sound";
 import { toast } from "sonner";
