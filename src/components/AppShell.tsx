@@ -123,6 +123,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             >
               {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
             </Button>
+            <ProBadgeButton />
             <AuthMenu />
           </div>
         </div>
